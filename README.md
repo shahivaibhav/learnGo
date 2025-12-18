@@ -262,3 +262,80 @@ Use `:=` when:
 
 * Declaring and initializing variables inside functions
 * Writing concise and idiomatic Go code
+
+---
+
+## Difference Between `fmt.Println` and `fmt.Printf`
+
+Go’s `fmt` package provides multiple output functions. The two most commonly used are `Println` and `Printf`, each serving different purposes.
+
+### `fmt.Println`
+
+`Println` is designed for **simple and readable output**.
+
+Characteristics:
+
+* Automatically adds a newline at the end
+* Automatically inserts spaces between arguments
+* Does **not** require format specifiers
+* Ideal for quick debugging and straightforward logging
+
+Example:
+
+```go
+fmt.Println("Name:", name)
+fmt.Println(name, age, salary)
+```
+
+Typical use cases:
+
+* Debugging
+* Printing simple values
+* Readable console output where formatting precision is not required
+
+---
+
+### `fmt.Printf`
+
+`Printf` is designed for **precise and controlled formatting**.
+
+Characteristics:
+
+* Does **not** add a newline automatically
+* Requires format specifiers (e.g., `%s`, `%d`, `%.2f`, `%c`)
+* Does not insert spaces automatically
+* Suitable for structured, formatted output
+
+Example:
+
+```go
+fmt.Printf("Name: %s\n", name)
+fmt.Printf("Salary: %.2f\n", salary)
+```
+
+Typical use cases:
+
+* Formatting numbers and strings
+* Generating reports
+* Logs where output format matters
+
+---
+
+### Key Differences at a Glance
+
+| Aspect             | Println                  | Printf                        |
+| ------------------ | ------------------------ | ----------------------------- |
+| Newline            | Added automatically      | Must be added manually (`\n`) |
+| Spacing            | Automatic                | Manual                        |
+| Format specifiers  | Not required             | Required                      |
+| Formatting control | Limited                  | High                          |
+| Common usage       | Debugging, simple output | Structured, formatted output  |
+
+---
+
+### When to Use Which
+
+* Use **`Println`** when simplicity and readability are more important than formatting.
+* Use **`Printf`** when you need strict control over how the output is displayed.
+
+Understanding this distinction helps write cleaner, more intentional Go output code.
