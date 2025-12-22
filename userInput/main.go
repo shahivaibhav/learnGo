@@ -1,6 +1,10 @@
 package userinput
 
-import "fmt"
+import (
+	"bufio"
+	"fmt"
+	"os"
+)
 
 func UserInput() {
 	fmt.Println("-----Taking user input using Scan-----")
@@ -39,4 +43,26 @@ func UserInput() {
 	)
 	fmt.Scanf("%d %s", &age, &city)
 	fmt.Printf("You are %d years old and live in %s.\n", age, city)
+}
+
+func UserInputUsingBuffIo() {
+	//There is a standard way for taking input from the user using bufio
+	// This method is more efficient and flexible for handling larger inputs or more complex input scenarios.
+	// It allows for buffered reading, which can improve performance when dealing with large amounts of data.
+	// It also provides more control over how input is read and processed by using various methods available in the bufio package.
+	// This method is particularly useful in scenarios where you need to read input line by line or when dealing with files.
+	// this is because it minimizes the number of read operations by buffering the input.
+	// Buffering means that instead of reading one byte or character at a time, larger chunks of data are read into memory at once.
+	// This reduces the overhead of multiple read calls, which can be costly in terms of performance, especially when reading from slower input sources like files or network connections.
+
+	fmt.Println("-----Taking user input using Buffio-----")
+
+	input := bufio.NewReader(os.Stdin)
+	fmt.Println("Enter your address:")
+	adress, _ := input.ReadString('\n')
+	fmt.Println("Your address is: " + adress)
+
+	//Must know Methods of Bufio:
+	//1. NewReader: This function creates a new buffered reader that reads from the specified io.Reader (in this case, os.Stdin for standard input).
+	//2.
 }

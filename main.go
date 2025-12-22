@@ -78,4 +78,5 @@ func main() {
 
 	fmt.Println("----- User Input Demo -----")
 	userinput.UserInput()
+	userinput.UserInputUsingBuffIo()
 }
