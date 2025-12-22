@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	myutils "go_tutorials/myUtils"
+	userinput "go_tutorials/userInput"
 	variables "go_tutorials/variablesDemo"
 )
 
@@ -74,4 +75,7 @@ func main() {
 	fmt.Println("Difference between Println and Printf")
 	PrintlnUseCase()
 	PrintfUseCase()
+
+	fmt.Println("----- User Input Demo -----")
+	userinput.UserInput()
 }

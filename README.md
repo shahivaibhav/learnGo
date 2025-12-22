@@ -309,8 +309,10 @@ Characteristics:
 Example:
 
 ```go
-fmt.Printf("Name: %s\n", name)
-fmt.Printf("Salary: %.2f\n", salary)
+fmt.Printf("Name: %s
+", name)
+fmt.Printf("Salary: %.2f
+", salary)
 ```
 
 Typical use cases:
@@ -323,13 +325,14 @@ Typical use cases:
 
 ### Key Differences at a Glance
 
-| Aspect             | Println                  | Printf                        |
-| ------------------ | ------------------------ | ----------------------------- |
-| Newline            | Added automatically      | Must be added manually (`\n`) |
-| Spacing            | Automatic                | Manual                        |
-| Format specifiers  | Not required             | Required                      |
-| Formatting control | Limited                  | High                          |
-| Common usage       | Debugging, simple output | Structured, formatted output  |
+| Aspect             | Println                  | Printf                       |
+| ------------------ | ------------------------ | ---------------------------- |
+| Newline            | Added automatically      | Must be added manually (`    |
+| `)                 |                          |                              |
+| Spacing            | Automatic                | Manual                       |
+| Format specifiers  | Not required             | Required                     |
+| Formatting control | Limited                  | High                         |
+| Common usage       | Debugging, simple output | Structured, formatted output |
 
 ---
 
@@ -339,3 +342,130 @@ Typical use cases:
 * Use **`Printf`** when you need strict control over how the output is displayed.
 
 Understanding this distinction helps write cleaner, more intentional Go output code.
+
+---
+
+## Taking User Input in Go (`fmt.Scan`, `fmt.Scanln`, `fmt.Scanf`)
+
+Go provides multiple functions in the `fmt` package to read user input from standard input. Each behaves differently and is suitable for specific scenarios.
+
+### `fmt.Scan`
+
+`Scan` reads space-separated values from standard input.
+
+Characteristics:
+
+* Stops reading at whitespace
+* Can read multiple values in one call
+* Requires pointers to variables
+* Ignores newlines
+
+Example:
+
+```go
+var firstName, lastName string
+fmt.Scan(&firstName, &lastName)
+```
+
+Best used when:
+
+* Input values are separated by spaces
+* Exact formatting is not required
+
+---
+
+### `fmt.Scanln`
+
+`Scanln` reads input until a newline is encountered.
+
+Important behavior:
+
+* Stops scanning at the first space
+* Treats spaces as separators
+* Does **not** read an entire line into a single string
+
+```go
+var name string
+fmt.Scanln(&name)
+```
+
+This is why input like:
+
+```
+Vaibhav Shahi
+```
+
+Results in:
+
+```
+name = "Vaibhav"
+```
+
+The remaining input (`Shahi`) stays in the buffer and can interfere with subsequent scans.
+
+---
+
+### `fmt.Scanf`
+
+`Scanf` reads input based on a format string.
+
+Characteristics:
+
+* Requires format specifiers
+* Input must strictly match the format
+* Fails silently if the format does not match
+
+Example:
+
+```go
+var age int
+var city string
+fmt.Scanf("%d %s", &age, &city)
+```
+
+If input does not match the expected format, variables remain unchanged (zero values).
+
+This explains output such as:
+
+```text
+You are 0 years old and live in .
+```
+
+---
+
+### Common Pitfalls
+
+1. **Leftover input in buffer**
+
+   * Mixing `Scan`, `Scanln`, and `Scanf` can leave unread input
+   * This causes unexpected behavior in subsequent reads
+
+2. **Spaces in input**
+
+   * None of these functions read full lines containing spaces into a single string
+
+---
+
+### Recommended Approach for Full-Line Input
+
+For reading an entire line (including spaces), use `bufio.Reader`:
+
+```go
+reader := bufio.NewReader(os.Stdin)
+input, _ := reader.ReadString('
+')
+```
+
+This is the idiomatic and reliable way to handle user input in real-world Go programs.
+
+---
+
+### Summary
+
+| Function | Reads spaces      | Format-based | Common use case               |
+| -------- | ----------------- | ------------ | ----------------------------- |
+| Scan     | No                | No           | Simple, space-separated input |
+| Scanln   | No                | No           | Single token per line         |
+| Scanf    | Depends on format | Yes          | Structured input              |
+
+For production-grade input handling, prefer `bufio.Reader` over `fmt.Scan*` functions.
