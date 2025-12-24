@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"go_tutorials/functions"
 	myutils "go_tutorials/myUtils"
 	userinput "go_tutorials/userInput"
 	variables "go_tutorials/variablesDemo"
@@ -79,4 +80,5 @@ func main() {
 	fmt.Println("----- User Input Demo -----")
 	userinput.UserInput()
 	userinput.UserInputUsingBuffIo()
+	functions.LearnFunctions()
 }
