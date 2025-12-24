@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"go_tutorials/functions"
 	myutils "go_tutorials/myUtils"
+	underscoreidentifier "go_tutorials/underScoreIdentifier"
 	userinput "go_tutorials/userInput"
 	variables "go_tutorials/variablesDemo"
 )
@@ -81,4 +82,5 @@ func main() {
 	userinput.UserInput()
 	userinput.UserInputUsingBuffIo()
 	functions.LearnFunctions()
+	underscoreidentifier.UnderscoreIdentifierDemo()
 }
